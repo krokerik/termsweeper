@@ -31,4 +31,6 @@ readme: termsweeper
 	echo \`\`\` > README.md
 	./termsweeper --help >> README.md
 	echo \`\`\` >> README.md
+	echo -n "README.md automatically generated on " >> README.md
+	date >> README.md
 fresh: | clean termsweeper readme
