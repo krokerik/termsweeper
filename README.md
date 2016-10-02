@@ -1,4 +1,5 @@
 ```
+termsweeper 0.02
 Usage: termsweeper [OPTION...]
 termsweeper - a simple minesweeper clone in the terminal.
 
@@ -16,4 +17,4 @@ for any corresponding short options.
 
 Report bugs to <erik_andersson007@hotmail.com>.
 ```
-README.md automatically generated on Sun Oct  2 02:27:34 DST 2016
+README.md automatically generated on Sun  2 Oct 14:23:41 CEST 2016

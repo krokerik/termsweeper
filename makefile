@@ -7,7 +7,7 @@ SRCDIR=src
 ODIR=obj
 LDIR =../lib
 
-LIBS=-lm
+LIBS=-lm -lncurses
 
 _DEPS = main.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
@@ -29,6 +29,7 @@ clean:
 readme: termsweeper
 	rm -f README.md
 	echo \`\`\` > README.md
+	./termsweeper --version >> README.md
 	./termsweeper --help >> README.md
 	echo \`\`\` >> README.md
 	echo -n "README.md automatically generated on " >> README.md

@@ -1,9 +1,17 @@
 #include <stdlib.h>
 #include <error.h>
 #include <argp.h>
+#include <ncurses.h>
 
-const char *argp_program_version = "termsweeper 0.01";
+/* Tile types */
+#define EMPTY          0
+#define MINE           1
+#define FLAG_AND_EMPTY 2
+#define FLAG_AND_MINE  3
+
+const char *argp_program_version = "termsweeper 0.02";
 const char *argp_program_bug_address = "<erik_andersson007@hotmail.com>";
+
 
 /* Program documentation. */
 static char doc[] = "termsweeper - a simple minesweeper clone in the\
@@ -60,6 +68,25 @@ parse_opt (int key, char *arg, struct argp_state *state) {
 /* Our argp parser. */
 static struct argp argp = { options, parse_opt, 0, doc };
 
+int isSolved(int *game, struct arguments args) {
+	int flag_count = 0;
+	for(int i=0; i<args.height; i++) {
+		for(int j=0; j<args.width; j++) {
+			switch(game[i*args.width + j]) {
+				case FLAG_AND_EMPTY:
+				case FLAG_AND_MINE:
+					flag_count++;
+					break;
+				case EMPTY:
+				case MINE:
+				default:
+					break;
+			}
+		}
+	}
+	return flag_count;
+}
+
 int
 main (int argc, char **argv)
 {
@@ -70,22 +97,57 @@ main (int argc, char **argv)
 	arguments.height = 40;
 	arguments.mine_count = 10;
 
+
 	/* Parse our arguments; every option seen by parse_opt will be
 	 * reflected in arguments. */
 	argp_parse (&argp, argc, argv, 0, 0, &arguments);
-
-	printf ("width\t%d\n", arguments.width);
-	printf ("height\t%d\n", arguments.height);
-	printf ("mines\t%d\n", arguments.mine_count);
-	
+	initscr();
+	printw ("width\t%d\n", arguments.width);
+	printw ("height\t%d\n", arguments.height);
+	printw ("mines\t%d\n", arguments.mine_count);
+	refresh();
+	getch();
+	endwin();
 	
 	// parse flags
 	// ask for input not provided at launch
 	// generate empty matrix of correct size
+	int *game;
+	game = malloc(arguments.height*arguments.width*sizeof(int));
+	for(int i=0; i<arguments.height; i++) {
+		for(int j=0; j<arguments.width; j++) {
+			game[i*arguments.width + j] = FLAG_AND_EMPTY;
+		}
+	}
 	// start game loop
-	//   draw ui
-	//   draw matrix
-	//   wait for first click and then place the mines
+	while(!isSolved(game, arguments)) {
+		int flag_count = 0;
+		for(int i=0; i<arguments.height; i++) {
+			for(int j=0; j<arguments.width; j++) {
+				switch(game[i*arguments.width + j]) {
+					case EMPTY:
+						printf("0");
+						break;
+					case MINE:
+						printf("*");
+						break;
+					case FLAG_AND_EMPTY:
+						printf("1");
+						break;
+					case FLAG_AND_MINE:
+						printf(".");
+						break;
+					default:
+						printf("?");
+				}
+			}
+			printf("\n");
+		}
+		// draw ui
+		// draw matrix
+		// wait for first click and then place the mines
+	}
+	free(game);
 
   exit (0);
 }
