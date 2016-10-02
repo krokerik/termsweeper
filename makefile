@@ -22,7 +22,13 @@ $(ODIR)/%.o: $(SRCDIR)/%.c $(DEPS)
 termsweeper: $(OBJ)
 	gcc -o $@ $^ $(CFLAGS) $(LIBS)
 
-.PHONY: clean
+.PHONY: clean readme
 
 clean:
 	rm -f $(ODIR)/*.o *~ core termsweeper
+readme: termsweeper
+	rm -f README.md
+	echo \`\`\` > README.md
+	./termsweeper --help >> README.md
+	echo \`\`\` >> README.md
+fresh: | clean termsweeper readme
