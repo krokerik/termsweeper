@@ -1,6 +1,6 @@
 IDIR=headers
 CC=gcc
-CFLAGS=-I$(IDIR)
+CFLAGS=-I$(IDIR) -std=c99
 
 SRCDIR=src
 
