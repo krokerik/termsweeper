@@ -34,4 +34,6 @@ readme: termsweeper
 	echo \`\`\` >> README.md
 	echo -n "README.md automatically generated on " >> README.md
 	date >> README.md
+	echo "last 5 commits:\n" >> README.md
+	git log --pretty=format:"%ad - %an: %s  " -5 >> README.md
 fresh: | clean termsweeper readme

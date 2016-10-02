@@ -17,4 +17,11 @@ for any corresponding short options.
 
 Report bugs to <erik_andersson007@hotmail.com>.
 ```
-README.md automatically generated on Sun  2 Oct 14:23:41 CEST 2016
+README.md automatically generated on Sun Oct  2 18:40:03 DST 2016
+last 5 commits:
+
+Sun Oct 2 18:39:58 2016 +0200 - Erik Andersson: added recent changes section of README.md  
+Sun Oct 2 17:02:13 2016 +0200 - Erik Andersson: made sure c99 is used with gcc  
+Sun Oct 2 14:24:36 2016 +0200 - Erik Andersson: generating empty matrix and rendering with ncurses  
+Sun Oct 2 02:28:35 2016 +0200 - Erik Andersson: added timestamp to readme generation  
+Sun Oct 2 02:08:15 2016 +0200 - Erik Andersson: added readme generation to makefile  
