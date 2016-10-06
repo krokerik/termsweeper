@@ -1,6 +1,6 @@
 IDIR=headers
 CC=gcc
-CFLAGS=-I$(IDIR)
+CFLAGS=-I$(IDIR) -std=c99
 
 SRCDIR=src
 
@@ -34,4 +34,6 @@ readme: termsweeper
 	echo \`\`\` >> README.md
 	echo -n "README.md automatically generated on " >> README.md
 	date >> README.md
+	echo "\nlast 5 commits:\n" >> README.md
+	git log --pretty=format:"%ad - %an: %s  " -5 >> README.md
 fresh: | clean termsweeper readme
