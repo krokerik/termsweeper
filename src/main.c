@@ -2,6 +2,8 @@
 #include <error.h>
 #include <argp.h>
 #include <ncurses.h>
+#include <math.h>
+#include <string.h>
 
 /* Tile types */
 #define EMPTY          0
@@ -87,6 +89,22 @@ int isSolved(int *game, struct arguments args) {
 	return flag_count;
 }
 
+int nDigits(int integer) {
+  return floor(log10(abs(integer))) + 1;
+}
+
+int nnDigits(int num, ...) {
+  va_list valist;
+  int sum = 0;
+  va_start(valist, num);
+
+  for(int i=0; i<num; i++) {
+    sum += nDigits(va_arg(valist, int));
+  }
+
+  return sum;
+}
+
 int
 main (int argc, char **argv)
 {
@@ -101,14 +119,22 @@ main (int argc, char **argv)
 	/* Parse our arguments; every option seen by parse_opt will be
 	 * reflected in arguments. */
 	argp_parse (&argp, argc, argv, 0, 0, &arguments);
+  int row,col;
+  char *msg;
+  char format[] = "width %d, height %d, mines %d, scr rows %d, scr cols %d";
 	initscr();
-	printw ("width\t%d\n", arguments.width);
-	printw ("height\t%d\n", arguments.height);
-	printw ("mines\t%d\n", arguments.mine_count);
+  getmaxyx(stdscr,row,col);
+  int len = strlen(format) + nnDigits(5,arguments.width, arguments.height,
+                                      arguments.mine_count, row, col);
+  msg = malloc(sizeof(char)*len);
+  snprintf(msg, len, format, arguments.width, arguments.height,
+           arguments.mine_count, row, col);
+	mvprintw (row/2,(col-strlen(msg))/2,msg);
 	refresh();
 	getch();
 	endwin();
-	
+  free(msg);
+
 	// parse flags
 	// ask for input not provided at launch
 	// generate empty matrix of correct size

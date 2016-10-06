@@ -17,4 +17,4 @@ for any corresponding short options.
 
 Report bugs to <erik_andersson007@hotmail.com>.
 ```
-README.md automatically generated on Sun  2 Oct 14:23:41 CEST 2016
+README.md automatically generated on Thu  6 Oct 17:16:25 CEST 2016
