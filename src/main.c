@@ -123,17 +123,19 @@ main (int argc, char **argv)
   char *msg;
   char format[] = "width %d, height %d, mines %d, scr rows %d, scr cols %d";
 	initscr();
-  getmaxyx(stdscr,row,col);
-  int len = strlen(format) + nnDigits(5,arguments.width, arguments.height,
-                                      arguments.mine_count, row, col);
-  msg = malloc(sizeof(char)*len);
-  snprintf(msg, len, format, arguments.width, arguments.height,
-           arguments.mine_count, row, col);
-	mvprintw (row/2,(col-strlen(msg))/2,msg);
-	refresh();
-	getch();
+  do {
+    clear();
+    getmaxyx(stdscr,row,col);
+    int len = strlen(format) + nnDigits(5,arguments.width, arguments.height,
+                                        arguments.mine_count, row, col);
+    msg = malloc(sizeof(char)*len);
+    snprintf(msg, len, format, arguments.width, arguments.height,
+             arguments.mine_count, row, col);
+  	mvprintw (row/2,(col-strlen(msg))/2,msg);
+  	refresh();
+    free(msg);
+  } while (getch() != 113);
 	endwin();
-  free(msg);
 
 	// parse flags
 	// ask for input not provided at launch
@@ -164,7 +166,7 @@ main (int argc, char **argv)
 						printf(".");
 						break;
 					default:
-						printf("?");
+			      printf("?");
 				}
 			}
 			printf("\n");
@@ -174,6 +176,5 @@ main (int argc, char **argv)
 		// wait for first click and then place the mines
 	}
 	free(game);
-
   exit (0);
 }

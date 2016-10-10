@@ -17,12 +17,12 @@ for any corresponding short options.
 
 Report bugs to <erik_andersson007@hotmail.com>.
 ```
-README.md automatically generated on Thu  6 Oct 17:18:12 CEST 2016
+README.md automatically generated on Mon 10 Oct 12:11:07 CEST 2016
 
 last 5 commits:
 
+Mon Oct 10 12:10:30 2016 +0200 - Erik Andersson: display settings and screen size until 'q' is pressed  
+Thu Oct 6 17:19:33 2016 +0200 - Erik Andersson: Merge branch 'master' of github.com:krokerik/termsweeper  
 Thu Oct 6 17:16:21 2016 +0200 - Erik Andersson: ncurses experiment with printing in the middle of the screen  
-Sun Oct 2 14:24:36 2016 +0200 - Erik Andersson: generating empty matrix and rendering with ncurses  
-Sun Oct 2 02:28:35 2016 +0200 - Erik Andersson: added timestamp to readme generation  
-Sun Oct 2 02:08:15 2016 +0200 - Erik Andersson: added readme generation to makefile  
-Sat Oct 1 22:17:59 2016 +0200 - Erik Andersson: added .gitignore to ensure obj directory exists but is empty  
+Sun Oct 2 18:45:29 2016 +0200 - Erik Andersson: Merge branch 'master' of github.com:krokerik/termsweeper  
+Sun Oct 2 18:39:58 2016 +0200 - Erik Andersson: added recent changes section of README.md  
