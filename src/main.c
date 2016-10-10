@@ -128,11 +128,26 @@ main (int argc, char **argv)
     getmaxyx(stdscr,row,col);
     int len = strlen(format) + nnDigits(5,arguments.width, arguments.height,
                                         arguments.mine_count, row, col);
-    msg = malloc(sizeof(char)*len);
-    snprintf(msg, len, format, arguments.width, arguments.height,
-             arguments.mine_count, row, col);
-  	mvprintw (row/2,(col-strlen(msg))/2,msg);
-  	refresh();
+    if(col<arguments.width || row<arguments.height) {
+      len = strlen("size of window too small, ensure %dx%dx") + nnDigits(2,
+            arguments.width,arguments.height);
+      msg = malloc(sizeof(char)*len);
+      snprintf(msg,len,"size of window too small, ensure %dx%d",arguments.width, arguments.height);
+    } else {
+      msg = malloc(sizeof(char)*len);
+      snprintf(msg, len, format, arguments.width, arguments.height,
+               arguments.mine_count, row, col);
+    }
+    int centery = row/2, centerx = col/2;
+    for(int i=0; i<arguments.height; i++) {
+      for(int j=0; j<arguments.width; j++) {
+        if(i==0||i==arguments.height-1||j==0||j==arguments.width-1) {
+          mvaddch(centery-arguments.height/2+i,centerx-arguments.width/2+j,254);
+        }
+      }
+    }
+    mvprintw (centery,centerx-strlen(msg)/2,msg);
+    refresh();
     free(msg);
   } while (getch() != 113);
 	endwin();
