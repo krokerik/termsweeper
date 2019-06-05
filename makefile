@@ -1,6 +1,6 @@
 IDIR=headers
 CC=gcc
-CFLAGS=-I$(IDIR) -std=c99
+CFLAGS=-I$(IDIR) -g -std=c99
 
 SRCDIR=src
 
@@ -22,7 +22,7 @@ $(ODIR)/%.o: $(SRCDIR)/%.c $(DEPS)
 termsweeper: $(OBJ)
 	gcc -o $@ $^ $(CFLAGS) $(LIBS)
 
-.PHONY: clean readme
+.PHONY: clean readme fresh
 
 clean:
 	rm -f $(ODIR)/*.o *~ core termsweeper
